@@ -23,16 +23,13 @@ All the tilt values won't exceed the range of 32-bit integer.
 */
 
 const findTilt = (root) => {
-  if (root === null) {
-    return 0;
-  }
+  if (!root) { return 0; }
+
   const getTreeSum = (node) => {
-    if (node === null) {
-      return 0;
-    }
+    if (!node) { return 0; }
     return node.val + getTreeSum(node.left) + getTreeSum(node.right);
   };
+
   let result = Math.abs(getTreeSum(root.left) - getTreeSum(root.right));
-  result += findTilt(root.left) + findTilt(root.right);
-  return result;
+  return result + findTilt(root.left) + findTilt(root.right);
 };
